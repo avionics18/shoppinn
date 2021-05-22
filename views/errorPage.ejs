@@ -1,0 +1,25 @@
+<%- include("./partials/header") %>
+<%- include("./partials/navbar") %>
+
+<div class="container-fluid py-5">
+	<% if(error && error.length) { %>
+        <div class="alert alert-danger shadow-sm fade show py-5">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                    <div class="text-center px-3">
+                        <p><i class="fas fa-exclamation-circle fa-5x"></i></p>
+                        <h3 class="font-weight-bold">Error 505</h3>
+                        <p><%= error %></p>
+                        <p>
+                            <img src="/images/error.png" alt="error" width="120">
+                        </p>
+                        <a href="/products" class="btn btn-dark rounded-pill px-4"><i class="fas fa-arrow-left mr-2"></i> Back To Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- .alert -->
+    <% } %>
+</div>
+
+<%- include("./partials/footer") %>

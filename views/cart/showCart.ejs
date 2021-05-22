@@ -1,0 +1,188 @@
+<%- include("../partials/header") %>
+<%- include("../partials/navbar") %>
+
+<div class="container py-5">
+	<div class="row">
+		<div class="col-lg-12">
+			<%- include("../partials/flash") %>
+		</div>
+		<div class="col-lg-7">
+			<div class="card bg-light border-top-8 border-top-primary shadow rounded-xlg mb-4">
+				<div class="card-body">
+					<h3 class="h5 font-weight-bold text-secondary">YOUR CART (<%= userCart.length %>)</h3>
+					<hr>
+					<% if (userCart.length) { %>
+						<% for(let item of userCart) { %>
+							<div class="bg-white p-3 shadow-sm mb-3">
+								<div class="d-flex">
+									<% if (item.product.img.substr(0, 4) == "http") { %>
+									<img class="object-fit-cover object-pos-center rounded-lg shadow-sm mr-3" src="<%= item.product.img %>" alt="<%= item.product.title %>" width="120" height="120">
+									<% } else { %>
+									<img class="object-fit-cover object-pos-center rounded-lg shadow-sm mr-3" src="/images/products/<%= item.product.img %>" alt="<%= item.product.title %>" width="120" height="120">
+									<% } %>
+									<div>
+										<p>
+											<span class="font-weight-bold text-secondary">
+												<%= item.product.title %>												
+											</span>
+											<br>
+											<span class="text-primary">
+												<b>
+													<i class="fas fa-rupee-sign mr-2"></i>
+													<%= item.product.price.toLocaleString() %>
+												</b>
+											</span>
+											<br>
+											<small><%= item.product.desc.substr(0, 120) %></small>
+										</p>
+										<div class="d-flex justify-content-between align-items-center">
+											<p class="m-0">
+												<button class="btn btn-light btn-sm shadow-sm border border-secondary" disabled>
+													<b>Qty: <%= item.qty %></b>
+												</button>
+											</p>
+											<p class="m-0">
+												<button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#remove-item-modal-<%= item.product.id %>">
+													<i class="far fa-trash-alt"></i> Remove
+												</button>
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						<% } %>
+					<% } else { %>
+						<div class="card border-0 rounded-0 shadow-sm">
+							<div class="card-body text-center text-secondary">Cart is empty!</div>
+						</div>
+					<% } %>
+				</div>
+			</div>
+		</div>
+		<!-- cart-details -->
+
+
+		<div class="col-lg-5">
+			<div class="card bg-light border-top-8 border-top-primary shadow rounded-xlg mb-4">
+				<div class="card-body">
+					<h3 class="h5 font-weight-bold text-secondary">ORDER SUMMARY</h3>
+					<hr>
+					<% if (userCart.length) { %>
+					<ul class="list-group list-group-flush shadow-sm">
+						<li class="list-group-item border-bottom bg-white">
+							<span class="text-dark">Subtotal:</span>
+							<span class="text-dark ml-3 font-weight-bold float-right">
+								<i class="fas fa-rupee-sign mr-2"></i><b><%= subTotal.toLocaleString() %></b>
+							</span>
+						</li>
+						<li class="list-group-item border-bottom bg-white">
+							<span class="text-dark">Shipping:</span>
+							<span class="text-dark ml-3 font-weight-bold float-right">
+								<i class="fas fa-rupee-sign mr-2"></i><b><%= shippingCharge %></b>
+							</span>
+						</li>
+						<li class="list-group-item border-bottom bg-white">
+							<span class="text-dark">Tax:</span></span>
+							<span class="text-dark ml-3 font-weight-bold float-right">
+								<i class="fas fa-rupee-sign mr-2"></i><b><%= tax.toLocaleString() %></b> (<%= taxRate %>%)
+							</span>
+						</li>
+						<li class="list-group-item bg-white">
+							<span class="text-dark">Total:</span>
+							<span class="h3 text-primary ml-3 font-weight-bold float-right">
+								<i class="fas fa-rupee-sign mr-2"></i><b><%= total.toLocaleString() %></b>
+							</span>
+						</li>
+					</ul>
+					<br>
+					<p class="text-center">
+						<button class="btn btn-success btn-block btn-lg" data-toggle="modal" data-target="#checkout-modal">CHECKOUT</button>
+					</p>
+					<% } else { %>
+					<div class="card border-0 rounded-0 shadow-sm">
+						<div class="card-body text-center text-secondary">Cart is empty!</div>
+					</div>
+					<% } %>
+				</div>
+			</div>
+		</div>
+		<!-- total-billing -->
+	</div>
+</div>
+
+
+
+<!-- Remove Item from Cart Modal -->
+<% if (userCart.length) { %>
+	<% for(let item of userCart) { %>
+		<div class="modal fade" id="remove-item-modal-<%= item.product.id %>" tabindex="-1">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content shadow-lg">
+					<div class="modal-header">
+						<h5 class="modal-title">Remove Item</h5>
+						<button class="close" data-dismiss="modal">
+							<span>&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						Are you sure, you want to remove <b><%= item.product.title %></b> from your cart
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<form action="/user/cart/<%= item.product._id %>?_method=DELETE" method="POST" class="d-inline">
+							<button class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i> Remove</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	<% } %>
+<% } %>
+
+
+<!-- Checkout Modal -->
+<!-- Modal -->
+<div class="modal fade" id="checkout-modal" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Checkout Details</h5>
+				<button type="button" class="close" data-dismiss="modal">
+					<span>&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form action="/paynow" method="POST" class="d-inline needs-validation" novalidate>
+					<div class="form-group">
+						<label for="name" class="small font-weight-bold text-secondary">Full Name</label>
+						<input type="text" name="name" id="name" class="form-control" placeholder="Enter your full name..." value="<%= currentUser.username %>" required>
+					</div>
+					<div class="form-group">
+						<label for="email" class="small font-weight-bold text-secondary">Email</label>
+						<input type="email" name="email" id="email" class="form-control" placeholder="Enter your mail..." value="<%= currentUser.email %>" required>
+					</div>
+					<div class="form-group">
+						<label for="phone" class="small font-weight-bold text-secondary">Phone No.</label>
+						<input type="tel" pattern="[0-9]{10}" maxlength="10" name="phone" id="phone" class="form-control" placeholder="Enter your 10-digit phone number..." required>
+						<div class="valid-feedback">Looks Good!</div>
+						<div class="invalid-feedback">Please provide a valid phone no.</div>
+					</div>
+					<div class="form-group">
+						<label for="amount" class="small font-weight-bold text-secondary">Amount (Rs.)</label>
+						<input type="number" name="amount" id="amount" class="form-control" value="<%= total %>" readonly>
+					</div>
+					<br>
+					<button type="submit" class="btn btn-success">Pay Now</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				</form>	
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<script src="/js/form-validation.js"></script>
+
+
+<%- include("../partials/footer") %>

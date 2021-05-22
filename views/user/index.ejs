@@ -1,0 +1,118 @@
+<%- include("../partials/header") %>
+<%- include("../partials/navbar") %>
+
+
+<link rel="stylesheet" href="/css/starability-fade.min.css">
+
+
+<div class="container py-5">
+	<div class="row">
+		<div class="col-lg-4">
+			<div class="media p-3 mb-3 align-items-center border rounded-lg shadow-sm">
+				<img src="/images/userLogo.jpg" class="mr-3 border border-primary rounded-xlg shadow" width="100" alt="User Avatar">
+				<div class="media-body">
+					<h3>
+						<span class="text-secondary">Hi!</span>
+						<br>
+						<span class="font-weight-bold text-capitalize"><%= user.username %></span>
+					</h3>
+				</div>
+			</div>
+			<!-- profile card -->
+
+			<div class="list-group border-top-8 border-primary rounded-lg overflow-hidden shadow text-uppercase">
+				<a href="#profile-page" class="list-group-item list-group-item-action font-weight-bold border-bottom border-secondary active" data-toggle="list">Profile &raquo;</a>
+				<a href="#my-orders" class="list-group-item list-group-item-action font-weight-bold border-bottom border-secondary" data-toggle="list">My Orders &raquo;</a>
+				<a href="#my-reviews" class="list-group-item list-group-item-action font-weight-bold" data-toggle="list">My Reviews &raquo;</a>
+			</div>
+			<!-- sidebar -->
+		</div>
+		<!-- col-lg-4 -->
+
+		<div class="col-lg-8">
+			<div class="border p-4 rounded-lg shadow-sm">
+				<div class="tab-content">
+					<div class="tab-pane fade show active" id="profile-page">
+						<div class="row">
+							<div class="col-lg-12">
+								<h3 class="h1 ff-akira">Profile</h3>
+								<hr>
+							</div>
+							<div class="col-lg-7">
+								<p class="text-secondary font-weight-bold mb-2">Username</p>
+								<h4 class="p-2 bg-white shadow-sm rounded-lg border border-secondary m-0"><%= user.username %></h4>
+								<br>
+								<p class="text-secondary font-weight-bold mb-2">Email</p>
+								<h4 class="p-2 bg-white shadow-sm rounded-lg border border-secondary m-0"><%= user.email %></h4>
+							</div>
+							<div class="col-lg-5 border-left">
+								<p class="m-0 text-center">
+									<img class="mw-100 shadow" src="/images/userLogo.jpg" alt="User Avatar">
+								</p>
+							</div>
+						</div>
+						<!-- row | #profile-page -->
+					</div>
+					<!-- tab-pane -->
+
+					<div class="tab-pane fade" id="my-orders">
+						<div class="row">
+							<div class="col-lg-12">
+								<h3 class="h1 ff-akira">My Orders</h3>
+								<hr>
+								<div class="card shadow-sm rounded-lg">
+									<div class="card-body text-center">
+										<span class="text-secondary font-weight-bold">No Orders Yet!</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- row | #my-orders -->
+					</div>
+					<!-- tab-pane -->
+
+					<div class="tab-pane fade" id="my-reviews">
+						<div class="row">
+							<div class="col-lg-12">
+								<h3 class="h1 ff-akira">My Reviews</h3>
+								<hr>
+								<% if (reviews.length) { %>
+									<% for(let review of reviews) { %>
+									<div class="card border-dark shadow overflow-hidden rounded-lg mb-3">
+										<div class="card-header bg-dark d-flex justify-content-between align-items-center">
+											<p class="mb-0 mr-2 text-light"><b>Rating:</b></p>
+											<p class="m-0 font-weight-bold starability-result" data-rating="<%= review.rating %>" style="transform: scale(0.8);">
+												Rating: <%= review.rating %>
+											</p>
+											<p class="m-0 text-secondary text-right small">
+												<i class="fas fa-at"></i><%= review.user %>
+											</p>
+										</div>
+										<div class="card-body">
+											<%= review.comment %>
+										</div>
+									</div>
+									<% } %>
+								<% } else { %>
+								<div class="card shadow-sm rounded-lg">
+									<div class="card-body text-center">
+										<span class="text-secondary">You haven't given any reviews to any product!</span>
+									</div>
+								</div>
+								<% } %>
+							</div>
+						</div>
+						<!-- row | #my-reviews -->
+					</div>
+					<!-- tab-pane -->
+				</div>
+				<!-- tab-content -->
+			</div>
+		</div>
+		<!-- col-lg-8 -->
+
+	</div>
+</div>
+
+
+<%- include("../partials/footer") %>

@@ -1,0 +1,45 @@
+<div class="bg-primary">
+	<div class="container">
+		<div class="navbar navbar-expand-sm navbar-dark bg-primary">
+			<a href="/" class="navbar-brand h5 m-0 ff-akira">
+				<img src="/images/logo.svg" alt="logo" style="height: 20px; vertical-align: text-bottom;"> Shopping Cart
+			</a>
+			<button class="navbar-toggler" data-toggle="collapse" data-target="#main-navbar">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="main-navbar">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item">
+						<a href="/products" class="nav-link">Products</a>
+					</li>
+					<li class="nav-item">
+						<a href="/user/cart" class="nav-link">
+							<span class="d-sm-none d-inline mr-2">Cart</span>
+							<i class="fas fa-shopping-bag"></i>
+							<% if (currentUser) { %>
+								<span class="badge badge-danger"><%= currentUser.cart.length %></span>
+							<% } else { %>
+								<span class="badge badge-danger">0</span>
+							<% } %>
+						</a>
+					</li>
+					<% if (currentUser) { %>
+					<li class="nav-item dropdown">
+					    <a class="nav-link dropdown-toggle font-weight-bold text-capitalize" href="#" data-toggle="dropdown">
+					        <i class="fas fa-user-circle mr-2"></i>Hello <%= currentUser.username %>
+					    </a>
+					    <div class="dropdown-menu shadow rounded-lg">
+					        <a class="dropdown-item" href="/profile"><b>Profile</b></a>
+					        <a class="dropdown-item" href="/logout"><b>Logout</b></a>
+					    </div>
+					</li>
+					<% } else { %>
+					<li class="nav-item">
+						<a href="/login" class="nav-link"><b>LOGIN</b></a>
+					</li>
+					<% } %>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

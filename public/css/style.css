@@ -1,0 +1,90 @@
+@font-face {
+    src: url('/fonts/akira.otf');
+    font-family: akira;
+}
+
+
+/*Utilities*/
+.object-fit-cover{
+	object-fit: cover;
+}
+.object-pos-center{
+	object-position: center;
+}
+.ff-akira{
+    font-family: akira, serif;
+}
+.text-lighter{
+    color: rgba(255,255,255,0.6);
+}
+.heading {
+  font-size: 2.5rem;
+}
+.rounded-xlg{
+    border-radius: 16px;
+}
+.border-top-8{
+	border-top: 8px solid;
+}
+.border-top-primary{
+	border-top-color: var(--primary);
+}
+
+
+
+
+/*---------- CUSTOM STYLING -----------*/
+
+/*Landing Page*/
+#hero .navbar{
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+#hero .navbar-brand{
+    font-size: 1.3rem;
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+@media (min-width: 992px){
+    #hero .navbar-nav .nav-link{
+        padding: 10px 30px !important;
+        border-left: 1px solid rgba(255,255,255,0.08);
+        border-right: 1px solid rgba(255,255,255,0.08);
+        text-transform: uppercase;
+    }
+}
+@media (max-width: 991.98px){
+    #hero .navbar-brand{
+        left: 16px;
+        transform: none;
+    }
+    .heading{
+        font-size: 2rem;
+    }
+}
+@media (max-width: 425px){
+    #hero .navbar-brand{
+        font-size: 1.1rem;
+    }
+}
+
+#hero{
+    min-height: 100vh;
+    background: linear-gradient(0deg, #728da9, #593196);
+}
+#hero .hero-content{
+    padding-top: 80px;
+}
+
+
+
+
+
+/*Signup & Login form*/
+.user-form-card{
+    border-radius: 20px;
+    border: 0px;
+    border-bottom: 8px solid var(--danger) !important;
+}

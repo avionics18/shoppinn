@@ -1,10 +1,11 @@
 {
-  "name": "e-commerce-app-v5",
+  "name": "shoppinn",
   "version": "1.0.0",
-  "description": "",
+  "description": "ecommerce-app",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "author": "Avinash Murmu",
   "license": "ISC",

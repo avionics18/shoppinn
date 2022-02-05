@@ -1,5 +1,5 @@
 if (process.env.NODE_ENV !== "production") {
-	require("dotenv").config();
+  require("dotenv").config();
 }
 
 const express = require("express");
@@ -21,14 +21,14 @@ const paymentRoutes = require("./payment/payment");
 
 // ===== DATABASE =====
 mongoose
-	.connect(process.env.DB_URL, {
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
-		useFindAndModify: false,
-		useCreateIndex: true,
-	})
-	.then(() => console.log("Connected to database successfully!"))
-	.catch((err) => console.log(err.message));
+  .connect(process.env.DB_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
+  })
+  .then(() => console.log("Connected to database successfully!"))
+  .catch((err) => console.log(err.message));
 
 // seed the database
 // seedDB();
@@ -42,11 +42,11 @@ app.use(express.json());
 app.use(methodOverride("_method"));
 
 app.use(
-	session({
-		secret: "weneedsomebettersecret",
-		resave: false,
-		saveUninitialized: true,
-	})
+  session({
+    secret: "weneedsomebettersecret",
+    resave: false,
+    saveUninitialized: true,
+  })
 );
 app.use(flash());
 
@@ -65,15 +65,15 @@ passport.deserializeUser(User.deserializeUser());
 
 // Template Globals
 app.use((req, res, next) => {
-	res.locals.success = req.flash("success");
-	res.locals.error = req.flash("error");
-	res.locals.currentUser = req.user;
-	next();
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
+  res.locals.currentUser = req.user;
+  next();
 });
 
 // Root Route
 app.get("/", (req, res) => {
-	res.render("homepage");
+  res.render("homepage");
 });
 
 app.use(productRoutes);
@@ -83,6 +83,7 @@ app.use(userRoutes);
 app.use(paymentRoutes);
 
 // server
-app.listen(process.env.PORT || 3000, () => {
-	console.log("Server running successfully");
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log("Server running successfully ", PORT);
 });

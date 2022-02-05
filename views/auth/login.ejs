@@ -1,12 +1,13 @@
 <%- include("../partials/header") %>
 
 <div class="bg-primary">
-    <div class="container vh-100 pt-5">
-        <div class="row pt-5">
-            <div class="col-lg-6 offset-lg-3">
+    <div class="container vh-100">
+        <div class="row h-100 justify-content-center align-items-center">
+            <div class="col-lg-6">
                 <div class="card shadow-lg user-form-card">
                     <div class="card-body px-5">
                         <h2 class="text-uppercase text-primary text-center ff-akira font-weight-bold my-4">LOGIN</h2>
+                        <p class="text-center small">Not a member? <a href="/register"><b>Register Now</b></a></p>
                         <%- include("../partials/flash") %>
                         <form class="needs-validation mb-5" action="/login" method="POST" novalidate>
                             <div class="input-group mb-4">
@@ -23,10 +24,9 @@
                             </div>
                             <button class="btn btn-danger btn-block btn-lg" type="submit">Login <i class="fas fa-paper-plane"></i></button>
                         </form>
-                        <p class="text-center small">Not a member? <a href="/register"><b>Register Now</b></a></p>
                         <p class="text-center">
                             <a href="/" class="btn btn-light ff-akira">
-                                <img src="/images/logo-dark.svg" alt="logo" style="height: 16px; vertical-align: text-bottom;"> <b>SHOPPING CART</b>
+                                <img src="/images/logo-dark.svg" alt="logo" style="height: 16px; vertical-align: text-bottom;"> <b>SHOPPINN</b>
                             </a>
                         </p>
                     </div>
